@@ -35,26 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const li = document.createElement('li');
             li.className = 'product-item';
-
-            let statusText = `${diffDays} gün kaldı`;
             
-            // Seçilen uyarı gününe göre veya tarihi geçmişse kırmızı flaşör uyarısı!
+            // Seçilen uyarı gününe göre kırmızı flaşör uyarısı
             if (diffDays <= product.warningCategory) {
                 li.classList.add('danger-flash');
-                if (diffDays < 0) statusText = 'TARİHİ GEÇTİ!';
             }
 
+            // Sadece Ürün İsmi ve Silme Butonu
             li.innerHTML = `
-                <div>
-                    <strong style="font-size:1.2rem;">${product.name}</strong> (${product.qty} Adet)<br>
-                    <small>SKT: ${product.date} | ${statusText}</small><br>
-                    <small style="color:#7f8c8d;">Uyarı Ayarı: ${product.warningCategory} Gün</small>
+                <div style="font-size:1.5rem; font-weight:bold; color:#2c3e50;">
+                    ${product.name}
                 </div>
                 <button class="delete-btn" onclick="deleteProduct(${index})">SİL</button>
             `;
             productList.appendChild(li);
         });
     }
+    
+
 
     window.deleteProduct = (index) => {
         products.splice(index, 1);
