@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
+        // Tarihe göre sırala (En yakın tarih en üstte)
         products.sort((a, b) => new Date(a.date) - new Date(b.date));
 
         products.forEach((product, index) => {
@@ -35,13 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const li = document.createElement('li');
             li.className = 'product-item';
-            
-            // Seçilen uyarı gününe göre kırmızı flaşör uyarısı
+
+            // Seçilen uyarı gününe göre kırmızı flaşör uyarısı!
             if (diffDays <= product.warningCategory) {
                 li.classList.add('danger-flash');
             }
 
-            // Sadece Ürün İsmi ve Silme Butonu
+            // SADECE ÜRÜN İSMİ VE SİL BUTONU
             li.innerHTML = `
                 <div style="font-size:1.5rem; font-weight:bold; color:#2c3e50;">
                     ${product.name}
@@ -51,8 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
             productList.appendChild(li);
         });
     }
-    
-
 
     window.deleteProduct = (index) => {
         products.splice(index, 1);
@@ -148,3 +147,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // İlk Yükleme
     renderProducts();
 });
+                          
