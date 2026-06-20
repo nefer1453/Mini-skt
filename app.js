@@ -147,4 +147,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // İlk Yükleme
     renderProducts();
 });
-                          
+    
