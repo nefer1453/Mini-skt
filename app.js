@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LİSTELEME VE UYARI MOTORU ---
+        // --- LİSTELEME VE UYARI MOTORU ---
     function renderProducts() {
         productList.innerHTML = '';
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        // Tarihe göre sırala (En yakın tarih en üstte)
         products.sort((a, b) => new Date(a.date) - new Date(b.date));
 
         products.forEach((product, index) => {
@@ -37,15 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             li.className = 'product-item';
 
-            // Seçilen uyarı gününe göre kırmızı flaşör uyarısı!
+            // Kaç gün kaldığı bilgisini hazırlayalım
+            let statusText = `${diffDays} Gün Kaldı`;
+            if (diffDays < 0) statusText = 'TARİHİ GEÇTİ!';
+
+            // Seçilen uyarı kategorisine (5, 10, 15, 30) göre kırmızı flaşör tetikleyicisi
             if (diffDays <= product.warningCategory) {
                 li.classList.add('danger-flash');
             }
 
-            // SADECE ÜRÜN İSMİ VE SİL BUTONU
+            // Sadece Ürün İsmi, Kaç Gün Kaldığı, SKT ve Sil Butonu
             li.innerHTML = `
-                <div style="font-size:1.5rem; font-weight:bold; color:#2c3e50;">
-                    ${product.name}
+                <div>
+                    <div style="font-size:1.5rem; font-weight:bold;">${product.name}</div>
+                    <div style="font-size:1.1rem; margin-top:5px; font-weight:bold; color:#c0392b;">${statusText}</div>
+                    <div style="font-size:0.9rem; margin-top:2px; opacity:0.9;">SKT: ${product.date}</div>
                 </div>
                 <button class="delete-btn" onclick="deleteProduct(${index})">SİL</button>
             `;
@@ -58,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('sktProducts', JSON.stringify(products));
         renderProducts();
     };
+});
 
     // --- SİHİRBAZ (TIKLA-GEÇ) MOTORU ---
     startWizardBtn.addEventListener('click', () => {
