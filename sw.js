@@ -1,4 +1,4 @@
-const CACHE_NAME = 'skt-kontrol-v1';
+const CACHE_NAME = 'skt-kontrol-v2';
 const ASSETS = [
     '/Mini-skt/',
     '/Mini-skt/index.html',
